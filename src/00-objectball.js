@@ -152,9 +152,54 @@ function teamColors(teamInput) {
 }
 
 function teamNames() {
+  newArray = [];
   const game = gameObject();
   for (const gameKey in game) {
     const teamObj = game[gameKey];
-    return teamObj.teamName;
+     newArray.push(teamObj.teamName);
+  }
+  return newArray;
+}
+
+function playerNumbers(teamInput) {
+  newArray = [];
+  const game = gameObject();
+  for (const gameKey in game) {
+    const teamObj = game[gameKey];
+    const playerObj = teamObj.players;
+    for (const playerKey in playerObj) {
+      if (teamObj.teamName === teamInput) {
+        newArray.push(playerObj[playerKey].number);
+      }
     }
   }
+  return newArray;
+}
+
+function playerStats(playerInput) {
+  const game = gameObject();
+    for (const gameKey in game) {
+    const teamObj = game[gameKey];
+    const playerObj = teamObj.players;
+      for (const playerKey in playerObj) {
+        if (playerKey === playerInput) {
+          return playerObj[playerKey];
+      }
+    }
+  }
+}
+
+function bigShoeRebounds() {
+  newPlayersArray = []
+  const game = gameObject();
+  for (const gameKey in game) {
+    const teamObj = game[gameKey];
+    const playerObj = teamObj.players;
+    for (const playerKey in playerObj) {
+        newPlayersArray.push(playerObj[playerKey]);
+        newPlayersArray.sort((function(a, b){
+          return a.shoe-b.shoe}));
+    }
+  }
+  return newPlayersArray[newPlayersArray.length-1].rebounds;
+}
